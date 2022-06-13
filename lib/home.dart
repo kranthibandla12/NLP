@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nlp/providers/dropdown_provider.dart';
 
 import 'chart/category_chart.dart';
 import 'chart/kinds_chart.dart';
 import 'chart/main_chart.dart';
 import 'chart_container.dart';
+import 'package:provider/provider.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -14,9 +16,9 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   // for dropdown
-  String dropdownvalue = 'select';
-  String maindropdownvalue = 'ALL';
-  String kindsdropdownvalue = 'select';
+  // String dropdownvalue = 'select';
+  // String maindropdownvalue = 'ALL';
+  // String kindsdropdownvalue = 'select';
   var items = [
     'select',
     'All',
@@ -29,6 +31,7 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
+    drop_provider_val pvd = Provider.of<drop_provider_val>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -38,7 +41,7 @@ class _homeState extends State<home> {
               height: 40,
             ),
             DropdownButton(
-              value: maindropdownvalue,
+              value: pvd.maindropdownvalue,
               icon: const Icon(Icons.keyboard_arrow_down),
               items: main_items.map((String main_items) {
                 return DropdownMenuItem(
@@ -47,21 +50,25 @@ class _homeState extends State<home> {
                 );
               }).toList(),
               onChanged: (String? newVal) {
-                setState(() {
-                  maindropdownvalue = newVal!;
-                  dropdownvalue = 'select';
-                  kindsdropdownvalue = 'select';
-                  print("onchange:= " + maindropdownvalue);
-                });
+                pvd.setmdrop = newVal!;
+                // print(pvd.maindropdownvalue);
+                pvd.setdrop = 'select';
+                pvd.setkdrop = 'select';
+                // setState(() {
+                //   maindropdownvalue = newVal!;
+                //   dropdownvalue = 'select';
+                //   kindsdropdownvalue = 'select';
+                //   print("onchange:= " + maindropdownvalue);
+                // });
               },
             ),
             SizedBox(
               height: 20,
             ),
             Visibility(
-              visible: maindropdownvalue == 'Categories' ? true : false,
+              visible: pvd.maindropdownvalue == 'Categories' ? true : false,
               child: DropdownButton(
-                value: dropdownvalue,
+                value: pvd.dropdownvalue,
                 icon: const Icon(Icons.keyboard_arrow_down),
                 items: items.map((String items) {
                   return DropdownMenuItem(
@@ -70,10 +77,11 @@ class _homeState extends State<home> {
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownvalue = newValue!;
-                    print("onchange:= " + dropdownvalue);
-                  });
+                  pvd.setdrop = newValue!;
+                  // setState(() {
+                  //   dropdownvalue = newValue!;
+                  //   print("onchange:= " + dropdownvalue);
+                  // });
                 },
               ),
             ),
@@ -81,9 +89,9 @@ class _homeState extends State<home> {
               height: 20,
             ),
             Visibility(
-              visible: maindropdownvalue == 'Kinds' ? true : false,
+              visible: pvd.maindropdownvalue == 'Kinds' ? true : false,
               child: DropdownButton(
-                value: kindsdropdownvalue,
+                value: pvd.kindsdropdownvalue,
                 icon: const Icon(Icons.keyboard_arrow_down),
                 items: kinds_items.map((String kinds_items) {
                   return DropdownMenuItem(
@@ -92,9 +100,10 @@ class _homeState extends State<home> {
                   );
                 }).toList(),
                 onChanged: (String? val) {
-                  setState(() {
-                    kindsdropdownvalue = val!;
-                  });
+                  pvd.setkdrop = val!;
+                  // setState(() {
+                  //   kindsdropdownvalue = val!;
+                  // });
                 },
               ),
             ),
@@ -102,48 +111,48 @@ class _homeState extends State<home> {
               height: 20,
             ),
             Visibility(
-              visible: dropdownvalue != 'select' ? true : false,
+              visible: pvd.dropdownvalue != 'select' ? true : false,
               child: ChartContainer(
-                title: dropdownvalue == 'All'
+                title: pvd.dropdownvalue == 'All'
                     ? 'Bar Chart with All Categories '
-                    : dropdownvalue == 'Good'
+                    : pvd.dropdownvalue == 'Good'
                         ? 'Bar Chart with Good Values '
-                        : dropdownvalue == 'Bad'
+                        : pvd.dropdownvalue == 'Bad'
                             ? 'Bar Chart with Bad Values '
-                            : dropdownvalue == 'Neutral'
+                            : pvd.dropdownvalue == 'Neutral'
                                 ? 'Bar Chart with Neutral Values '
                                 : 'Bar Chart',
                 color: Colors.transparent,
                 chart: BarChartContent(
-                  dropdownvalue: dropdownvalue,
+                  dropdownvalue: pvd.dropdownvalue,
                 ),
               ),
             ),
             Visibility(
-              visible: maindropdownvalue == 'ALL' ? true : false,
+              visible: pvd.maindropdownvalue == 'ALL' ? true : false,
               child: ChartContainer(
                 title: 'Bar Chart',
                 color: Colors.transparent,
                 chart: BarMainChartContent(
-                  dropdownvalue: maindropdownvalue,
+                  dropdownvalue: pvd.maindropdownvalue,
                 ),
               ),
             ),
             Visibility(
-              visible: kindsdropdownvalue != 'select' ? true : false,
+              visible: pvd.kindsdropdownvalue != 'select' ? true : false,
               child: ChartContainer(
-                title: kindsdropdownvalue == 'Services'
+                title: pvd.kindsdropdownvalue == 'Services'
                     ? 'Services Bar Chart'
-                    : kindsdropdownvalue == 'UI'
+                    : pvd.kindsdropdownvalue == 'UI'
                         ? 'UI Bar Chart'
-                        : kindsdropdownvalue == 'Iot'
+                        : pvd.kindsdropdownvalue == 'Iot'
                             ? 'Iot Bar Chart'
-                            : kindsdropdownvalue == 'Solar'
+                            : pvd.kindsdropdownvalue == 'Solar'
                                 ? 'Solar Bar Chart'
                                 : 'Bar Chart',
                 color: Colors.transparent,
                 chart: BarKindsChartContent(
-                  dropdownvalue: kindsdropdownvalue,
+                  dropdownvalue: pvd.kindsdropdownvalue,
                 ),
               ),
             ),

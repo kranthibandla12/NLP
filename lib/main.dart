@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nlp/home.dart';
+import 'package:nlp/providers/dropdown_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'chart/category_chart.dart';
 import 'nlp data/nlp_data_functions.dart';
+
 
 void main() {
   ///main function
@@ -19,7 +22,13 @@ void main() {
   good_categories();
   bad_categories();
   neutral_categories();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+        providers: [
+          ChangeNotifierProvider<drop_provider_val>(create: (_) => drop_provider_val(),)],
+        child: const MyApp(),
+    )
+     );
 }
 
 class MyApp extends StatelessWidget {
