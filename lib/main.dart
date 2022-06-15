@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'nlp_data/fetch_api_data.dart';
 import 'nlp_data/nlp_data_functions.dart';
 
-git a
 void main()  async {
   ///fetch data
   await fetchdata();
