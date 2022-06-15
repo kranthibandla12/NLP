@@ -3,11 +3,15 @@ import 'package:nlp/home.dart';
 import 'package:nlp/providers/dropdown_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'chart/category_chart.dart';
-import 'nlp data/nlp_data_functions.dart';
+import 'nlp_data/fetch_api_data.dart';
+import 'nlp_data/nlp_data_functions.dart';
 
+git a
+void main()  async {
+  ///fetch data
+  await fetchdata();
+  // gbd_function();
 
-void main() {
   ///main function
   main_data();
 
@@ -38,6 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

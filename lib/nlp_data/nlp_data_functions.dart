@@ -3,7 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'nlp_data.dart';
+import 'fetch_api_data.dart';
 
 /// for main page dashboard.
 int g_main = 0, b_main = 0, n_main = 0, good = 0, bad = 0, neutral = 0;

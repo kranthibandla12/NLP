@@ -2,8 +2,7 @@ import 'dart:ui';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import '../nlp data/nlp_data.dart';
-import '../nlp data/nlp_data_functions.dart';
+import '../nlp_data/nlp_data_functions.dart';
 
 List<BarChartGroupData> barKindsChartGroupData(topic) => List.generate(3, (i) {
       switch (i) {
