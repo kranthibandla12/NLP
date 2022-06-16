@@ -15,13 +15,25 @@ List good_score=[],
     ui_array=[],
     iot_array=[],
     solar_array=[],
-    rating_score=[];
+    rating_score=[],
+/// table
+    user_name_array=[],
+    content_array=[],
+    reply_content_array=[],
+    review_created_version_array=[],
+    review_id_array=[],
+    user_image_array=[],
+    thumbs_up_count_array=[],
+    at_array=[],
+    replied_at_array=[];
+
+String latest_comment = 'abc';
 
 fetchdata() async {
 
   try{
     // print("hiiiiiiiiii");
-    http.Response response = await http.get(Uri.parse("https://5000-vipinrohill-pythongitpo-u7ljlnkab9f.ws-us47.gitpod.io/"),
+    http.Response response = await http.get(Uri.parse("https://5000-vipinrohill-pythongitpo-cfu0z1koulw.ws-us47.gitpod.io/"),
         headers: {"Accept" : "application/json",
         "Access-Control_Allow_Origin": "*"});
     var real_response = jsonDecode(response.body);
@@ -40,6 +52,18 @@ fetchdata() async {
     iot_array = real_response['iot_array'];
     solar_array = real_response['solar_array'];
     rating_score = real_response['rating_array'];
+    latest_comment = real_response['latest_comment'];
+    print(latest_comment);
+    /// for review table
+    user_name_array = real_response['user_name'];
+    content_array = real_response['content_array'];
+    reply_content_array = real_response['reply_content'];
+    // review_created_version_array = real_response['review_created_version'];
+    // review_id_array = real_response['review_id'];
+    // user_image_array = real_response['user_image'];
+    // thumbs_up_count_array = real_response['thumbs_up_count'];
+    // at_array = real_response['at'];
+    // replied_at_array = real_response['replied_at'];
   }
   catch (e){
     debugPrint(e.toString());

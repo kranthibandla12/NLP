@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nlp/home.dart';
 import 'package:nlp/providers/dropdown_provider.dart';
+import 'package:nlp/review/review_board.dart';
 import 'package:provider/provider.dart';
 
 import 'nlp_data/fetch_api_data.dart';
 import 'nlp_data/nlp_data_functions.dart';
 
-git a
 void main()  async {
   ///fetch data
   await fetchdata();
@@ -67,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const home()));
   }
+  _review(){
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const review_board()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => _home(),
               child: Text(
                 "Go to DashBoard",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text("Latest comment : "+latest_comment),
+            SizedBox(height: 20,),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
+              onPressed: () => _review(),
+              child: Text(
+                "Reviews Board",
                 style: TextStyle(color: Colors.white),
               ),
             ),
